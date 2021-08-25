@@ -1,15 +1,38 @@
-// importing modules
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
-  
-  
-var UserSchema = new Schema({   
-    email: String,
-    password : String
+const mongoose = require('mongoose');
+
+const UserSchema = mongoose.Schema({
+    name: {
+        type: String,
+        //required: true
+    },
+    username: {
+        type: String,
+        unique: true,
+        //required: true
+    },
+    email: {
+        type: String,
+        unique: true,
+        //required: true
+    },
+    password: {
+        type: String,
+        //required: true
+    },
+    emailVerified: {
+        type: Boolean,
+        default: false,
+        //required: true
+    },
+    isAdmin:{
+        type: Boolean,
+        default: false,
+    },
+    isDeliveryGuy: {
+        type: Boolean,
+        default: false,
+    }
 });
-  
-// plugin for passport-local-mongoose
-  
-// export userschema
- module.exports = mongoose.model("User", UserSchema);
+
+const User = mongoose.model('User',UserSchema);
+module.exports = User;
